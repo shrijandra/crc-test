@@ -12,11 +12,11 @@
   connection: local
   gather_facts: false
  
- tasks:
-  - name: List all namespaces via OpenShift Projects API
-    kubernetes.core.k8s_info
-      api_version: v1
-      kind: Namesapce
-    register: projects_result
-  - debug:
-      msg: "Found {{ projects_result.resources | length }} namespaces"
+  tasks:
+   - name: List all namespaces via OpenShift Projects API
+     kubernetes.core.k8s_info
+       api_version: v1
+       kind: Namesapce
+     register: projects_result
+   - debug:
+       msg: "Found {{ projects_result.resources | length }} namespaces"
