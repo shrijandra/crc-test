@@ -1,0 +1,22 @@
+---
+# ============================================================
+# AAP Job Template Playbook — Test OpenShift Connectivity
+# Tests: Service Account auth + List Namespaces via ngrok
+# Requirements:
+#   - AAP Credential: OpenShift/Kubernetes API Bearer Token
+#   - OR extra_vars: ocp_api_url, ocp_token
+# ============================================================
+ 
+- name: Test OpenShift Connectivity via ngrok — List Namespaces
+  hosts: localhost
+  connection: local
+  gather_facts: false
+ 
+ tasks:
+  - name: List all namespaces via OpenShift Projects API
+    kubernetes.core.k8s_info
+      api_version: v1
+      kind: Namesapce
+    register: projects_result
+  - debug:
+      msg: "Found {{ projects_result.resources | length }} namespaces"
